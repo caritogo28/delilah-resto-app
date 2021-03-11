@@ -1,0 +1,29 @@
+{
+  "name": "Delilah-Resto",
+  "version": "1.0.0",
+  "description": "Proyecto Backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "Carolina Gomez Sanchez",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "5.0.0",
+    "bcryptjs": "2.4.3",
+    "express": "4.17.1",
+    "express-mysql-session": "2.1.4",
+    "express-session": "1.17.1",
+    "express-validator": "6.6.1",
+    "jsonwebtoken": "8.5.1",
+    "morgan": "1.10.0",
+    "mysql": "2.18.1",
+    "passport": "0.4.1",
+    "passport-jwt": "4.0.0",
+    "passport-local": "1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

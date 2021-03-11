@@ -1,0 +1,785 @@
+---
+openapi: 3.0.0
+info:
+  title: Delilah Resto
+  description: Resful API - App Delilah Resto Restaurant
+  contact:
+    name: Carolina Gómez Sánchez
+    url: https://github.com/caritogo28/delilah-resto-app.git
+    email: carito-2807@hotmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/caritogo28/DelilahResto/1.0.0
+  description: SwaggerHub API Auto Mocking
+paths:
+  /users/{id}:
+    get:
+      description: Get information about a user by means of their id
+      parameters:
+      - name: id
+        in: path
+        description: id the user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"the user does not exist"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"Internal Server Error"}'
+  /users:
+    get:
+      description: Get a list of users
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200'
+        "403":
+          description: User does not have access
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"user does not have access to this resource to one that is authenticated"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Internal Server Error"}'
+  /users/edit/{id}:
+    put:
+      description: Edit user in the database
+      parameters:
+      - name: id
+        in: path
+        description: edit user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/id'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Messsage":"User Edited"}'
+        "403":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"You are not authorized to do this type of operation with this id"}'
+        "500":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"Internal Server Error"}'
+  /users/delete/{id}:
+    delete:
+      description: Delete user of the database
+      parameters:
+      - name: id
+        in: path
+        description: delete user
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"User Deleted"}'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"the user does not exist"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Internal Server Error"}'
+  /signup:
+    post:
+      description: Create a new user in the database
+      parameters:
+      - name: create user
+        in: query
+        description: create user
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/create user'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_1'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Internal Server Error"}'
+  /signin:
+    post:
+      description: Login
+      parameters:
+      - name: login
+        in: query
+        description: login
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/login'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_1'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Internal Server Error"}'
+  /logout:
+    get:
+      description: Logout
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"SignIn - Login"}'
+  /profile:
+    get:
+      description: Profile
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_1'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Internal Server Error"}'
+  /products:
+    get:
+      description: Get a list of products
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_2'
+        "204":
+          description: There are no products in the database
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"There are no products in the database"}'
+  /products/{id}:
+    get:
+      description: Obtain information about a product by means of their id
+      parameters:
+      - name: id
+        in: path
+        description: id the product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_2'
+        "404":
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"the product does not exist"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"Internal Server Error"}'
+  /products/add:
+    post:
+      description: create a new product in the database
+      parameters:
+      - name: create product
+        in: query
+        description: create product
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/create product'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"added product"}'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"verify the data and try again"}'
+  /products/edit/{id}:
+    put:
+      description: edit product in the database
+      parameters:
+      - name: id
+        in: path
+        description: edit product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/id_1'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Product edited"}'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"verify the data and try again"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"Internal Server Error"}'
+  /products/delete/{id}:
+    delete:
+      description: Delete product of the database
+      parameters:
+      - name: id
+        in: path
+        description: delete product
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Product Deleted"}'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"the product does not exist"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Internal Server Error"}'
+  /orders:
+    get:
+      description: Get a list of orders
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_3'
+        "204":
+          description: not products in the database
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"There are no orders to show"}'
+  /orders/{id}:
+    get:
+      description: obtain information about a order by means of their id
+      parameters:
+      - name: id
+        in: path
+        description: id the order
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/inline_response_200_3'
+        "204":
+          description: not products in the database
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"the order does not exist in the system"}'
+  /orders/edit/{id}:
+    put:
+      description: edit order in the database
+      parameters:
+      - name: id
+        in: path
+        description: edit order
+        required: true
+        style: simple
+        explode: false
+        schema:
+          $ref: '#/components/schemas/id_2'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Order Updated"}'
+        "204":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"The order you are looking for does not exist"}'
+        "500":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"Internal Server Error"}'
+  /orders/delete/{id}:
+    delete:
+      description: delete order of the database
+      parameters:
+      - name: id
+        in: path
+        description: delete order
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: number
+          example: 1
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"Order Deleted"}'
+        "204":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"The order you are looking for does not exist"}'
+        "400":
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"You cannot delete an order already in process, change the status to canceled"}'
+  /orders/add:
+    post:
+      description: create a new order in the database
+      parameters:
+      - name: create order
+        in: query
+        description: create order
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/create order'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Message":"order added"}'
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: string
+                example: '{"Error":"verify the data and try again"}'
+components:
+  schemas:
+    inline_response_200:
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          example: carogoms
+        fullname:
+          type: string
+          example: Carolina Gomez Sanchez
+        email:
+          type: string
+          example: carito-2807@hotmail.com
+        phone_number:
+          type: number
+          example: 1112223344
+        address:
+          type: string
+          example: Calle 10 - Diagonal 8 - 100
+        password:
+          type: string
+          example: $23df4gd5gf58fuwen3r4e234ssoo98
+        is_admin:
+          type: integer
+          example: 1
+    id:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: carogoms
+        fullname:
+          type: string
+          description: fullname
+          example: Carolina Gomez Sanchez
+        email:
+          type: string
+          description: email
+          example: carito-2807@hotmail.com
+        phone_number:
+          type: number
+          example: 1112223344
+        address:
+          type: string
+          example: Calle 10 - Diagonal 8 - 100
+        password:
+          type: string
+          example: HolaMundo12
+        is_admin:
+          type: number
+          example: 0
+    create user:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: carogoms
+        fullname:
+          type: string
+          description: fullname
+          example: Carolina Gomez Sanchez
+        email:
+          type: string
+          description: email
+          example: carito-2807@hotmail.com
+        phone_number:
+          type: number
+          example: 1112223344
+        address:
+          type: string
+          example: Calle 10 - Diagonal 8 - 100
+        password:
+          type: string
+          example: HolaMundo12
+        is_admin:
+          type: number
+          example: 0
+    inline_response_200_1:
+      properties:
+        id:
+          type: integer
+          example: 1
+        username:
+          type: string
+          description: username
+          example: carogoms
+        fullname:
+          type: string
+          description: fullname
+          example: Carolina Gomez Sanchez
+        email:
+          type: string
+          description: email
+          example: carito-2807@hotmail.com
+        phone_number:
+          type: number
+          example: 1112223344
+        address:
+          type: string
+          example: Calle 10 - Diagonal 8 - 100
+        password:
+          type: string
+          example: HolaMundo12
+        is_admin:
+          type: number
+          example: 0
+    login:
+      type: object
+      properties:
+        username:
+          type: string
+          description: username
+          example: carogoms
+        password:
+          type: string
+          description: password
+          example: HolaMundo12
+    inline_response_200_2:
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: hamburguer
+        description:
+          type: string
+          example: Pan, Lechuga, Queso, Tomate, Carne
+        price:
+          type: number
+          example: 18000
+        picture:
+          type: string
+          example: https://www.pexels.com/es-es/foto/close-up-de-comida-servida-en-la-mesa-327158/
+        is_avaliable:
+          type: number
+          example: 1
+    create product:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+          example: Hamburgesa
+        description:
+          type: string
+          description: description
+          example: Pan, Lechuga, Tomate, Queso, Carne
+        price:
+          type: string
+          description: price
+          example: "18000"
+        picture:
+          type: string
+          description: picture
+          example: https://www.pexels.com/es-es/foto/close-up-de-comida-servida-en-la-mesa-327158/
+        is_avaliable:
+          type: number
+          example: 1
+    id_1:
+      type: object
+      properties:
+        name:
+          type: string
+          description: name
+          example: Hamburgesa
+        description:
+          type: string
+          description: description
+          example: Pan, Lechuga, Tomate, Queso, Carne
+        price:
+          type: string
+          description: price
+          example: "18000"
+        picture:
+          type: string
+          description: picture
+          example: https://www.pexels.com/es-es/foto/close-up-de-comida-servida-en-la-mesa-327158/
+        is_avaliable:
+          type: number
+          example: 1
+    inline_response_200_3:
+      properties:
+        id:
+          type: integer
+          example: 1
+        state:
+          type: string
+          example: confirmed
+        order_date:
+          type: string
+          example: 2021-03-01
+        amount:
+          type: number
+          example: 2
+        product:
+          type: string
+          example: Hamburguer
+        description:
+          type: string
+          example: Pan, lechuga, tomate, queso, carne
+        payment_method:
+          type: string
+          example: efectivo
+        price:
+          type: number
+          example: 18000
+        username:
+          type: string
+          example: carogoms
+        fullname:
+          type: string
+          example: Carolina Gomez Sanchez
+        address:
+          type: string
+          example: Calle 10 - Diagonal 8 - 100
+        phone_number:
+          type: number
+          example: 1112223344
+        email:
+          type: string
+          example: carito-2807@hotmail.com
+    id_2:
+      type: object
+      properties:
+        state:
+          type: number
+          description: state of the order
+          example: 2
+    ordersadd_products:
+      type: object
+      properties:
+        id_product:
+          type: number
+          description: id product
+          example: 2
+        amount:
+          type: number
+          description: amount products
+          example: 3
+    create order:
+      type: object
+      properties:
+        id_payment_method:
+          type: number
+          description: id payment method
+          example: 2
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/ordersadd_products'
