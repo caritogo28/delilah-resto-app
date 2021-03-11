@@ -98,7 +98,7 @@ Para interactuar con el proyecto debes seguir estos endpoints que están creado 
 - Tarjeta de debito
 - Tarjeta de credito
 
-#### Status de las órdenes
+### Status de las órdenes
 
 - New
 - Confirmed
@@ -106,6 +106,6 @@ Para interactuar con el proyecto debes seguir estos endpoints que están creado 
 - On the Go
 - Delivered
 
-#### Puerto para el servidor
+### Puerto para el servidor
 
 `3000`
