@@ -1,4 +1,4 @@
-# Proyecto Delilah Resto - Backends
+# Proyecto Delilah Resto - Backend
 
 Proyecto educativo de Acámica, se trata de un proyecto backend de Pedidos para un restaurante
 
