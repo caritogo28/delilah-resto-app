@@ -10,6 +10,9 @@ Proyecto educativo de Acámica, se trata de un proyecto backend de Pedidos para 
 - bcrypt.JS
 - MySQL
 
+## Documentación API
+Encuentra la documentación de la API en el archivo `CarolinaGomez-DelilahResto-1.0.0.yaml` o en el link https://app.swaggerhub.com/apis/caritogo28/DelilahResto/1.0.0
+
 ## Guia de instalación
 
 ### 1. Descarga el proyecto
